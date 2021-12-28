@@ -1,0 +1,20 @@
+Code smells review
+
+Long Parameter List:
+Concordo tanto com o code smell sugerido pelo colega como com a solução dada e penso que está tudo em conformidade com o que nos foi apresentado em aula.
+
+Realizado por: Diogo Rosa 57464
+
+
+Long Method:
+I agree with my teammate code smell identification and the refactoring solution, even though the method only calls another method and has 2 conditions.
+As a payoff of refactoring classes with short methods live longest because the longer a method or function is, the harder it becomes to understand and maintain it.
+In addition, long methods offer the perfect hiding place for unwanted duplicate code.
+
+By: Dinis Silvestre - 58763
+
+
+Message chain:
+Concordo com a identificação do meu colega, porque de facto há a chamada consecutiva de vários métodos.
+
+Realizado por: Tiago Duarte 58125

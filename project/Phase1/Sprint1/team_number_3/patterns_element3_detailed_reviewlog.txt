@@ -1,0 +1,23 @@
+Design Patterns review
+
+Observer:
+I agree with the choice of this design pattern since as justified by my colleague, it receives notifications of changes on the observed class.
+
+By: Artur Lourenço 63764
+
+
+Singleton:
+I agree with my teammate design pattern identification. Singleton is a creational design pattern that lets us ensure that a class has only one instance, while providing a 
+global access point to this instance. All implementations of the Singleton make the default constructor private, to prevent other objects from using the new operator with 
+the Singleton class ( = new logMessages()) and create a static creation method that acts as a constructor (static LogMessages instance). Under the hood, this method calls 
+the private constructor to create an object and saves it in a static field. All following calls to this method return the cached object. Whenever the getInstance() method 
+is called, the same object is always returned.
+
+By: Dinis Silvestre - 58763
+
+
+
+Factory Pattern:
+Concordo com a escolha do meu colega e parece existir a necessidade de existir um factory pattern, apesar de não ter certeza quanto ao produto que é utilizado. 
+
+Realizado por: Diogo Rosa

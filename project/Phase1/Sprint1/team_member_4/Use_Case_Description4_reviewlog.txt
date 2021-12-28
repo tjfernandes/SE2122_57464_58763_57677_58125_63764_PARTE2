@@ -1,0 +1,6 @@
+Use Case Description Review
+
+Penso que o use case diagram que o meu colega fez para o Jabref está correto e abrange as suas funcinalidades generalizadas, representadas pelas abas na barra superior da aplicação. Também considero que os atores utilizados fazem sentido no contexto do problema e as ligações entre estes e os casos estam corretas.
+
+
+Realizado por: Diogo Rosa 57464

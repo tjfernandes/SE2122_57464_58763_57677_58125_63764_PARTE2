@@ -1,0 +1,18 @@
+Code smells review
+
+Lazy Class:
+Concordo tanto com o code smell sugerido pelo colega como com a solução dada e penso que está tudo em conformidade com o que nos foi apresentado em aula.
+
+Realizado por: Diogo Rosa 57464
+
+Data Class:
+I agree with the data class code smell in class VersionPreferences, the fact that it  only has the constructor and a getter and is such a small class means the code on this class
+should be in another class. 
+
+By: Artur Lourenço 63764
+
+Feature Envy:
+I agree with this smell identified by my teammate. In fact, the class is more focusing in manipulating data from another class than its own data.
+This smell is explained well according to what was teached in classes.
+
+By: Tiago Fernandes 57677

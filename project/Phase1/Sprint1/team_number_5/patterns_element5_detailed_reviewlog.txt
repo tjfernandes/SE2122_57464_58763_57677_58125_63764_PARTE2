@@ -1,0 +1,21 @@
+Pattern review
+
+Command Pattern:
+Concordo com a escolha do meu colega, pois é fácil de verificar que existe uma necessidade de guardar um histórico para voltar a utilizar mais tarde, para, por exemplo, desfazer alterações feitas por comandos. Assim, faz sentido pela definição e estrutura do Command Pattern este modelo ser usado.
+
+Realizado por: Diogo Rosa 57464
+
+
+Composite:
+I agree with the identification of the pattern by my colleague. It identifies the component and the composite classes correctly.
+However, the leaf class is not identified.
+
+By: Tiago Fernandes 57677
+05/12/2021
+14:24
+
+
+Factory Pattern:
+Concordo com o factory encontrado pelo meu colega, pois cria a tabela de icones mediante o seu tipo. Assim posso concluir que é um pattern porque é somente utilizado para a criação de novos objetos. 
+
+Realizado por: Tiago Duarte 58125

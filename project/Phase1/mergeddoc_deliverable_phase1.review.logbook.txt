@@ -1,0 +1,332 @@
+Review Logbook
+
+Code Smells Review
+
+Data Class
+
+I agree with the data class code smell in class AutoCompletionInput, the fact that it  only has getters and setters and is such a small class means the code on this class should be in another class. 
+By: Artur Lourenço 63764
+
+
+Feature Envy
+
+Concordo com o code smell feature envy na classe JabRefDesktop, devido ao facto de apenas chamar a instancia da classe OS, pelo que a indentificação foi correta podendo este método encontrar-se na classe OS.
+Realizado por: Tiago Duarte 58125
+
+
+Switch Statement:
+
+I agree with btoh the identification of my colleague and its refactoring proposal. We are using switch statements with the same objective.
+So we are violating the OO programming.
+By: Tiago Fernandes 57677
+
+Data class:
+I agree with both the code smell suggested and the solution. Since the class is so small (22 lines of code) which only include 2 getters I agree with the suggestion of just deleting this data class and putting its code where it’s used.
+
+By: Artur Lourenço 63764
+
+
+Duplicate code:
+Concordo com a solução dada pelo colega, no entanto e embora também considere que existe código duplicado, penso que o code smell se aproxima mais ao Speculative Generality.
+
+Realizado por: Diogo Rosa 57464
+
+
+Long Method:
+Concordo com a análise, pois o método realmente é muito longo pelo que poderia criar-se novos métodos para facilitar a leitura do mesmo.
+
+Realizado por: Tiago Duarte 58125
+
+Long method:
+I agree with both my teammate identification of the smell and its refactoring solution. The method is in fact a long method and the best
+solution that I found is to divide it into smaller and simpler methods.
+
+By: Tiago Fernandes 57677
+
+
+Lazy Class:
+I agree with my teammate code smell identification and the refactoring solution. The class is indeed a lazy class because this class has not a single method,
+which means the class isn’t too useful. As this class doesn´t have a single method, it should be deleted.
+
+By: Dinis Silvestre - 58763
+
+
+Feature Envy:
+I agree with my teammate code smell identification and the refactoring solution. This class has indeed the code smell called Feature Envy, because all its methods
+accesses the data of the class BidEntryType more than its own data. As a payoff of moving the methods to the BidEntryTipe class, the result could be a better code
+organization.
+
+By: Dinis Silvestre - 58763
+
+Singleton:
+My teammate correctly identified the singleton class.
+This class has a method (getInstance()) which return an singleton instance of the class itself.
+This method allows only one instance to be created, so this is a singleton.
+
+By: Tiago Fernandes 57677
+06/12/2001
+10:15
+
+Command Pattern:
+A análise do meu colega é, a meu ver correta, conseguindo identificar na JabRefPreferences a criação dos comandos e a classe PushToApplicationPreferences como o tratamento e execução do comandos.
+
+Realizado por: Tiago Duarte 58125
+
+Observer Pattern:
+Concordo com a análise pois é criada uma lista de observados que funcionarão como informação ao observador caso façam algum movimento.
+
+Realizado por: Tiago Duarte 58125
+
+Long Parameter List:
+Concordo tanto com o code smell sugerido pelo colega como com a solução dada e penso que está tudo em conformidade com o que nos foi apresentado em aula.
+
+Realizado por: Diogo Rosa 57464
+
+
+Long Method:
+I agree with my teammate code smell identification and the refactoring solution, even though the method only calls another method and has 2 conditions.
+As a payoff of refactoring classes with short methods live longest because the longer a method or function is, the harder it becomes to understand and maintain it.
+In addition, long methods offer the perfect hiding place for unwanted duplicate code.
+
+By: Dinis Silvestre - 58763
+
+
+Message chain:
+Concordo com a identificação do meu colega, porque de facto há a chamada consecutiva de vários métodos.
+
+Realizado por: Tiago Duarte 58125
+
+
+
+Design Patterns review
+
+Singleton:
+I agree with this design pattern seeing as on the class ExternalFileTypes we only want one object of the class (identified on the getInstance method), which makes this design pattern an ideal solution here.
+
+By: Artur Lourenço 63764
+
+
+Factory Pattern:
+I agree with my teammate design pattern identification. The ActionFactory is indeed a Factory Pattern which provides an interface (Action) for creating objects 
+in a superclass, but the problem is that can allow subclasses to alter the type of objects that will be created. As a solution, the Factory Method pattern suggests 
+that we replace direct object construction calls (using the new operator) with calls to a special factory method.
+
+By: Dinis Silvestre 58763
+
+
+Template method:
+I do not agree with this design pattern identified by my colleague since there is not a template method in the abstract class.
+The template method responsibility is to execute the steps of a specific algorithm.
+This steps are methods in the abstract class (abstract or not) and their implementation differ in each subclass.
+
+By: Tiago Fernandes 57677
+05/12/2021
+14:00
+
+Prototype:
+After my teammate changed the template method pattern to the prototype I can agree with this identification.
+There is a prototype interface (Clonable) and a ConcretePrototype class (IntegrityMessage). This class has method clone() which is called by
+other classes.
+
+By: Tiago Fernandes 57677
+05/12/2021
+21:30
+
+Composite:
+I agree with the choice of this design pattern seeing as it demonstrates the hierarchical structure present in the composite design pattern, containing the composite,
+the components, and the leaf. 
+
+By: Artur Lourenço 63764
+
+
+Factory Pattern:
+I agree with my teammate design pattern identification. Through the ExporterFactory class, the conclusion of the pattern is indeed a Factory Pattern, which provides 
+an interface which objective is to create Exporter objects, allowing its subclasses to change them in a specific way. As a solution, the Factory Method pattern 
+suggests that we replace direct object construction calls (using the new operator) with calls to a special factory method.
+
+By: Dinis Silvestre 58763
+
+
+Template Pattern:
+Concordo com o pattern encontrado, visto que o código na classe bibDatabaseWriter funciona como esqueleto e é extendido pela classe BibtexDatabaseWriter, que apenas implementa parte dos métodos da sua superclasse. Outra confirmação deste pattern é a existência de um template method.
+
+Realizado por: Diogo Rosa 57464
+
+Observer:
+I agree with the choice of this design pattern since as justified by my colleague, it receives notifications of changes on the observed class.
+
+By: Artur Lourenço 63764
+
+
+Singleton:
+I agree with my teammate design pattern identification. Singleton is a creational design pattern that lets us ensure that a class has only one instance, while providing a 
+global access point to this instance. All implementations of the Singleton make the default constructor private, to prevent other objects from using the new operator with 
+the Singleton class ( = new logMessages()) and create a static creation method that acts as a constructor (static LogMessages instance). Under the hood, this method calls 
+the private constructor to create an object and saves it in a static field. All following calls to this method return the cached object. Whenever the getInstance() method 
+is called, the same object is always returned.
+
+By: Dinis Silvestre - 58763
+
+
+
+Factory Pattern:
+Concordo com a escolha do meu colega e parece existir a necessidade de existir um factory pattern, apesar de não ter certeza quanto ao produto que é utilizado. 
+
+Realizado por: Diogo Rosa
+
+Singleton:
+My teammate correctly identified the singleton class.
+This class has a method (getInstance()) which return an singleton instance of the class itself.
+This method allows only one instance to be created, so this is a singleton.
+
+By: Tiago Fernandes 57677
+06/12/2001
+10:15
+
+Command Pattern:
+A análise do meu colega é, a meu ver correta, conseguindo identificar na JabRefPreferences a criação dos comandos e a classe PushToApplicationPreferences como o tratamento e execução do comandos.
+
+Realizado por: Tiago Duarte 58125
+
+Observer Pattern:
+Concordo com a análise pois é criada uma lista de observados que funcionarão como informação ao observador caso façam algum movimento.
+
+Realizado por: Tiago Duarte 58125
+
+Command Pattern:
+Concordo com a escolha do meu colega, pois é fácil de verificar que existe uma necessidade de guardar um histórico para voltar a utilizar mais tarde, para, por exemplo, desfazer alterações feitas por comandos. Assim, faz sentido pela definição e estrutura do Command Pattern este modelo ser usado.
+
+Realizado por: Diogo Rosa 57464
+
+
+Composite:
+I agree with the identification of the pattern by my colleague. It identifies the component and the composite classes correctly.
+However, the leaf class is not identified.
+
+By: Tiago Fernandes 57677
+05/12/2021
+14:24
+
+
+Factory Pattern:
+Concordo com o factory encontrado pelo meu colega, pois cria a tabela de icones mediante o seu tipo. Assim posso concluir que é um pattern porque é somente utilizado para a criação de novos objetos. 
+
+Realizado por: Tiago Duarte 58125
+
+
+Metrics Analysis review (Complexity)
+By Tiago Fernandes 57677
+
+My colleague begins to explain correctly what are cyclomatic complexity metrics, what they do and what they can be used for. He explains the different ranges for low, medium and high values of complexity and also states that these metrics determine if the code is stable and trustworthy.
+•	Project-wise: 1.79 average cyclomatic complexity metrics (acceptable);
+•	Package-wise: 4,49 (acceptable)
+
+Methods:
+As my colleague said, in the method view we have 4 complexity metrics:
+•	Cognitive complexity
+•	essencial cyclomatic complexity
+•	design complexity
+•	cyclomatic complexity
+Cognitive complexity and Design complexity:
+The cognitive complexity measures the difficulty to intuitively understand a certain unit of code and the design complexity measures how complex is the design.
+I agree with my teammate when he states that these metrics have both very high values for some methods and I also consider his solutions for these high values correct.
+One solution to lower these high cognitive complexity values is to cut down the nesting by deleting unecessary conditions and also some switch case can eliminate some code smells (Switch Statementes code smell).
+For the design complexity, we can fix the Long method code smell by lowering the methods size.
+Regarding the cyclomatic complexity, my colleague suggests that  we should eliminate all code smells that affect the legibility of the methods. I agree with both this solution and the perceptive relation that he found between the complexity of the methods and the complexity of the rest of the class, package and project.
+
+Metrics Review
+
+I agree with the metrics review made by my colleague. There were a couple of spelling mistakes which I corrected but in general the information seems pretty cohesive and understandable. The relation between the different metrics that exist in the Lines of Code Metrics are well analyzed as well as the different levels of interface, class and methods.
+
+Interface
+	As specified by my colleague, the existence of an excessive number of comment lines of code may be the result of a code smell, as something that needs to be excessively commented may be hiding an unnecessary complexity.
+
+Class
+	In regards to the class metrics, the same can be verified about the comment lines of code, and the relation with the lines of code. As analyzed by my colleague, a high ratio between lines of code and comment lines of code can be the result of hidden complexity on the methods of a certain class. A big number of lines of code may also be a sign that the class has a blob class code smell, meaning the class may have more responsibilities than those that are needed, which could then be refactored by splitting the responsibilities and placing them somewhere else, although it’s not a guarantee of a code smell.
+
+Method
+	In the methods metrics, we can once again relate the ratio between lines of code and comment lines of code, since the existance of too many comment lines of code may be the result of a code smell. A big number of lines of code can also mean we have a Long method code smell, which means the method is more complex than it should be, and it has more occuring within it than it should. Although it’s likely this is a code smell, the method can simply be naturally long, as methods such as a user interface have a tendency to be pretty long to deal with the different possibilities. 
+
+Reviewed by: Artur Lourenço 63764
+
+
+Dependency Metrics
+I agree with my teammate about these metrics set. These metrics set are very detailed metrics on dependencies. It provides information about cyclic dependencies and transitive dependencies of classes, as well as dependents on each class. This metric explicitly excludes infrastructure-focused dependencies like databases and operating systems, which will be developed as a distinct metric.
+Objectives
+The Upstream Code Dependency metric is aimed at understanding the code-based dependencies which are required to build, test, or run a piece of software. The Upstream Code Dependency metric can help identify what projects, libraries, or versions my project directly or transitively depends on.
+Metrics Overall
+ Direct Dependencies (Dcy and Dcp)
+First-order dependencies, as declared in the source code and/or package manager configuration. 
+ Transitive Dependencies (Dcy* and Dcp*)
+Dependencies beyond first-order dependencies are also referred to as nested or second-order dependencies. For example, project A under evaluation is dependent on project B and project B is dependent on Project C. For project A, project C is a transitive dependency. 
+ 
+ Cyclic Dependencies (Cyclic)
+Dependencies where if traced eventually lead back to themselves. In systems that allow circular dependencies, we assume that a given dependency is only counted once in this case.
+Conclusion
+These metrics are based on the calculations of the number of immediate (or not – as transitive) subclasses subordinate to a class in the hierarchy.
+
+Made by: Dinis Silvestre - 58763
+
+
+Metrics Rewiew
+
+
+	Em relação à análise feita venho reforçar o facto de o meu colega e bem ter falado do facto do Mood Metrics calcular a quantidade de: métodos visíveis, métodos invisíveis, heranças, atributos visíveis, atributos invisíveis… apresentando no final a percentagem dos cálculos em relação ao projeto. Se os valores estiverem dentro dos ideais, então pode concluir-se que o projeto se encontra nas proporções ideais para ser um orientado a objetos. Caso os valores não sejam ideais, então podem surgir vários code smells: Long Method, Duplicate Code, Large Class, Dead Code etc. todos apresentados pelo meu colega, pelo que não coloco nenhum ponto a mais na análise feita.
+
+
+
+Realizado por: 
+Tiago Duarte 58125
+
+
+Review das metrics
+
+Concordo com a análise feita pelo meu colega sobre as Martin Packaging Metrics do projeto e não encontrei quaisquer erros. É um facto que o JabRef tem muito pouca abstração o que é obviamente um dos principais problemas, juntamente com o número exagerado de dependências que algumas classes possuem, como é mencionado no documento de análise das metrics, é obvio que o Jabref iria ser beneficiado por uma redução dos code smells ao longo do programa.
+
+
+Realizado por: Diogo Rosa 57464
+
+
+Use Case Description Review
+
+I agree with the way my colleague made his use case diagram. I agree with the choice of having one actor since the client tab is used by the client and is made by the system (JabRef).
+The use cases determine each of the editions the user can make. The undo and redo use cases are pretty self explanatory since if the user makes any mistake he can undo what he
+did and can redo in case he wants to go back forward. The cut includes the copy since the cut is simply a copy that also deletes. Rank use case is extended by the several
+possibilities of ranking between 1 and 5 stars and clearing the status. Same thing with the priority since it is extended by clear, setting to high, medium or low priorities.
+Read status is also extended by the different possibilities insided the read status selection. I think all the use cases are implemented correctly by my colleague and all
+possibilities of the edit tab are covered.
+
+Reviewed by: Artur Lourenço 63764
+
+Use Case Description Review
+
+Em relação ao use case realizado pelo meu colega, quero enfatizar o facto de ter sido feita uma análise sobre a forma de criação da entry. 
+A entry no aplicação JabRef pode ser criada e editada pelo cliente ou procurada na web e adicionada à biblioteca, pelo que entam em ação dois atores, um principal e um secondário que o foram definidos como cliente e web respetivamente. 
+O meu colega abrangeu todos os casos necessários e mínimos da funcionalidade library pelo que considero que o use case diagram se encontra bem executado.
+
+Realizado por: Tiago Duarte 58125
+
+File Use Case:
+
+I agree with my teammate´s use case (by starUml) and description. I agree, as well, with the functionalities and the way the client requests to the client and to
+the local. The diagram has only one primary actor and two secondary actors.
+
+By: Dinis Silvestre 58763
+
+Use Case Description Review
+
+Penso que o use case diagram que o meu colega fez para o Jabref está correto e abrange as suas funcinalidades generalizadas, representadas pelas abas na barra superior da
+aplicação. Também considero que os atores utilizados fazem sentido no contexto do problema e as ligações entre estes e os casos estam corretas.
+
+
+Realizado por: Diogo Rosa 57464
+
+Use Case Diagram review:
+
+I reckon that the diagram made by my colleague is correct.
+Talking into account the Quality system and its use cases, the associations, extends and
+includes designed are correct and coherent with the problem.
+
+By: Tiago Fernandes
+06/12/2021
+20:43

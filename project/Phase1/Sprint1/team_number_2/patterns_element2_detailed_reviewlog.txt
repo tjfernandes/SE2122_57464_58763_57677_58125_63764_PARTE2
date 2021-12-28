@@ -1,0 +1,21 @@
+Design Patterns review
+
+Composite:
+I agree with the choice of this design pattern seeing as it demonstrates the hierarchical structure present in the composite design pattern, containing the composite,
+the components, and the leaf. 
+
+By: Artur Lourenço 63764
+
+
+Factory Pattern:
+I agree with my teammate design pattern identification. Through the ExporterFactory class, the conclusion of the pattern is indeed a Factory Pattern, which provides 
+an interface which objective is to create Exporter objects, allowing its subclasses to change them in a specific way. As a solution, the Factory Method pattern 
+suggests that we replace direct object construction calls (using the new operator) with calls to a special factory method.
+
+By: Dinis Silvestre 58763
+
+
+Template Pattern:
+Concordo com o pattern encontrado, visto que o código na classe bibDatabaseWriter funciona como esqueleto e é extendido pela classe BibtexDatabaseWriter, que apenas implementa parte dos métodos da sua superclasse. Outra confirmação deste pattern é a existência de um template method.
+
+Realizado por: Diogo Rosa 57464

@@ -1,0 +1,33 @@
+Design Patterns review
+
+Singleton:
+I agree with this design pattern seeing as on the class ExternalFileTypes we only want one object of the class (identified on the getInstance method), which makes this design pattern an ideal solution here.
+
+By: Artur Lourenço 63764
+
+
+Factory Pattern:
+I agree with my teammate design pattern identification. The ActionFactory is indeed a Factory Pattern which provides an interface (Action) for creating objects 
+in a superclass, but the problem is that can allow subclasses to alter the type of objects that will be created. As a solution, the Factory Method pattern suggests 
+that we replace direct object construction calls (using the new operator) with calls to a special factory method.
+
+By: Dinis Silvestre 58763
+
+
+Template method:
+I do not agree with this design pattern identified by my colleague since there is not a template method in the abstract class.
+The template method responsibility is to execute the steps of a specific algorithm.
+This steps are methods in the abstract class (abstract or not) and their implementation differ in each subclass.
+
+By: Tiago Fernandes 57677
+05/12/2021
+14:00
+
+Prototype:
+After my teammate changed the template method pattern to the prototype I can agree with this identification.
+There is a prototype interface (Clonable) and a ConcretePrototype class (IntegrityMessage). This class has method clone() which is called by
+other classes.
+
+By: Tiago Fernandes 57677
+05/12/2021
+21:30

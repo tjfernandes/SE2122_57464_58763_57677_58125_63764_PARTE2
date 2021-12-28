@@ -1,0 +1,7 @@
+Use Case Description Review
+
+Em relação ao use case realizado pelo meu colega, quero enfatizar o facto de ter sido feita uma análise sobre a forma de criação da entry. 
+A entry no aplicação JabRef pode ser criada e editada pelo cliente ou procurada na web e adicionada à biblioteca, pelo que entam em ação dois atores, um principal e um secondário que o foram definidos como cliente e web respetivamente. 
+O meu colega abrangeu todos os casos necessários e mínimos da funcionalidade library pelo que considero que o use case diagram se encontra bem executado.
+
+Realizado por: Tiago Duarte 58125

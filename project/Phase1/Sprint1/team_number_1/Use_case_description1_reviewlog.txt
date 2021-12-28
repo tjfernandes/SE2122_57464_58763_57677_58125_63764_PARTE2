@@ -1,0 +1,10 @@
+Use Case Description Review
+
+I agree with the way my colleague made his use case diagram. I agree with the choice of having one actor since the client tab is used by the client and is made by the system (JabRef).
+The use cases determine each of the editions the user can make. The undo and redo use cases are pretty self explanatory since if the user makes any mistake he can undo what he
+did and can redo in case he wants to go back forward. The cut includes the copy since the cut is simply a copy that also deletes. Rank use case is extended by the several
+possibilities of ranking between 1 and 5 stars and clearing the status. Same thing with the priority since it is extended by clear, setting to high, medium or low priorities.
+Read status is also extended by the different possibilities insided the read status selection. I think all the use cases are implemented correctly by my colleague and all
+possibilities of the edit tab are covered.
+
+Reviewed by: Artur Lourenço 63764

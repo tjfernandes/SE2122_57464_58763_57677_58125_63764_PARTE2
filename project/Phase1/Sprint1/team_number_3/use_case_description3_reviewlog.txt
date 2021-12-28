@@ -1,0 +1,6 @@
+File Use Case:
+
+I agree with my teammate´s use case (by starUml) and description. I agree, as well, with the functionalities and the way the client requests to the client and to
+the local. The diagram has only one primary actor and two secondary actors.
+
+By: Dinis Silvestre 58763

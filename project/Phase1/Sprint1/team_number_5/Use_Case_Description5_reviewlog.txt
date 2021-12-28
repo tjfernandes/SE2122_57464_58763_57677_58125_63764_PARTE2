@@ -1,0 +1,9 @@
+Use Case Diagram review:
+
+I reckon that the diagram made by my colleague is correct.
+Talking into account the Quality system and its use cases, the associations, extends and
+includes designed are correct and coherent with the problem.
+
+By: Tiago Fernandes
+06/12/2021
+20:43

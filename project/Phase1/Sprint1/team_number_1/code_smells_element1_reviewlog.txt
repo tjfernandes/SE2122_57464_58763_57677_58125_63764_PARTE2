@@ -1,0 +1,19 @@
+Code Smells Review
+
+Data Class
+
+I agree with the data class code smell in class AutoCompletionInput, the fact that it  only has getters and setters and is such a small class means the code on this class should be in another class. 
+By: Artur Lourenço 63764
+
+
+Feature Envy
+
+Concordo com o code smell feature envy na classe JabRefDesktop, devido ao facto de apenas chamar a instancia da classe OS, pelo que a indentificação foi correta podendo este método encontrar-se na classe OS.
+Realizado por: Tiago Duarte 58125
+
+
+Switch Statement:
+
+I agree with btoh the identification of my colleague and its refactoring proposal. We are using switch statements with the same objective.
+So we are violating the OO programming.
+By: Tiago Fernandes 57677
