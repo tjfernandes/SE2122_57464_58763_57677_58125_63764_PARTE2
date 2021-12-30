@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import org.controlsfx.control.CheckTreeView?>
 <?import org.controlsfx.control.textfield.CustomTextField?>
+<<<<<<< HEAD
 <DialogPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.jabref.gui.SearchLibraries"
@@ -21,4 +22,14 @@
         </StackPane>
     </content>
 
+=======
+
+<DialogPane fx:id="dialogPane"
+            xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.jabref.gui.SearchLibrariesView"
+            prefHeight="40.0" prefWidth="400.0">
+    <ButtonType fx:constant="CANCEL"/>
+>>>>>>> 3bc91b43e6a7ce070cbb47cf60219ea550a5c50b
 </DialogPane>
+

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import org.jabref.gui.icon.JabRefIconView?>
+<DialogPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.jabref.gui.SearchLibrariesResultDialog"
+            prefHeight="400.0" prefWidth="600.0">
+    <content>
+        <VBox>
+            <SplitPane fx:id="container" orientation="VERTICAL"/>
+            <ToggleButton fx:id="keepOnTop" styleClass="icon-button,narrow" prefHeight="20.0" prefWidth="20.0">
+                <graphic>
+                    <JabRefIconView glyph="KEEP_ON_TOP"/>
+                </graphic>
+                <tooltip>
+                    <Tooltip text="%Keep dialog always on top"/>
+                </tooltip>
+            </ToggleButton>
+
+        </VBox>
+    </content>
+    <ButtonType fx:constant="OK"/>
+</DialogPane>
