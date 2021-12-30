@@ -135,6 +135,7 @@ public class JabRefFrame extends BorderPane {
     private TabPane tabbedPane;
     private PopOver progressViewPopOver;
     private PopOver entryFromIdPopOver;
+    private PopOver entryFromEntryTypes;
 
     private Subscription dividerSubscription;
 
@@ -465,6 +466,7 @@ public class JabRefFrame extends BorderPane {
                 new HBox(
                         factory.createIconButton(StandardActions.NEW_ARTICLE, new NewEntryAction(this, StandardEntryType.Article, dialogService, prefs, stateManager)),
                         factory.createIconButton(StandardActions.NEW_ENTRY, new NewEntryAction(this, dialogService, prefs, stateManager)),
+                        createNewEntryForEntryType(),
                         createNewEntryFromIdButton(),
                         factory.createIconButton(StandardActions.NEW_ENTRY_FROM_PLAIN_TEXT, new ExtractBibtexAction(dialogService, prefs, stateManager)),
                         factory.createIconButton(StandardActions.DELETE_ENTRY, new EditAction(StandardActions.DELETE_ENTRY, this, stateManager))
@@ -913,6 +915,36 @@ public class JabRefFrame extends BorderPane {
         newEntryFromIdButton.setTooltip(new Tooltip(Localization.lang("Import by ID")));
 
         return newEntryFromIdButton;
+    }
+
+    private Button createNewEntryForEntryType() {
+        Button button = new Button();
+
+        button.setGraphic(IconTheme.JabRefIcons.ADVANCED_SEARCH.getGraphicNode());
+        button.getStyleClass().setAll("icon-button");
+        button.setFocusTraversable(false);
+        button.disableProperty().bind(ActionHelper.needsDatabase(stateManager).not());
+        button.setOnMouseClicked(event -> {
+            GenerateEntryForEntryType entryFromId = new GenerateEntryForEntryType(getCurrentLibraryTab(), dialogService, prefs, taskExecutor, stateManager);
+
+            if (entryFromEntryTypes == null) {
+                entryFromEntryTypes = new PopOver(entryFromId.getDialogPane());
+                entryFromEntryTypes.setTitle(Localization.lang("Search for entry types"));
+                entryFromEntryTypes.setArrowLocation(PopOver.ArrowLocation.TOP_CENTER);
+                entryFromEntryTypes.setContentNode(entryFromId.getDialogPane());
+                entryFromEntryTypes.show(button);
+                entryFromId.setEntryFromIdPopOver(entryFromEntryTypes);
+            } else if (entryFromEntryTypes.isShowing()) {
+                entryFromEntryTypes.hide();
+            } else {
+                entryFromEntryTypes.setContentNode(entryFromId.getDialogPane());
+                entryFromEntryTypes.show(button);
+                entryFromId.setEntryFromIdPopOver(entryFromEntryTypes);
+            }
+        });
+        button.setTooltip(new Tooltip(Localization.lang("Search for entry types")));
+
+        return button;
     }
 
     private Group createTaskIndicator() {
