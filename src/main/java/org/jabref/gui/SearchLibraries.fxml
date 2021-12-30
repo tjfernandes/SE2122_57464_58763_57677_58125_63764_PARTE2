@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import org.controlsfx.control.CheckTreeView?>
 <?import org.controlsfx.control.textfield.CustomTextField?>
-
 <DialogPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.jabref.gui.SearchLibraries"
-            prefHeight="40.0" prefWidth="400.0">
+            prefHeight="200.0" prefWidth="400.0">
         <buttonTypes>
             <ButtonType fx:constant="CANCEL"/>
             <ButtonType fx:id="searchButton" buttonData="OK_DONE" text="%Search"/>
         </buttonTypes>
     <content>
-        <GridPane>
-            <CustomTextField fx:id="searchBox" promptText="%Search" prefHeight="30.0" prefWidth="400.0">
-            </CustomTextField>
-        </GridPane>
+        <StackPane VBox.vgrow="ALWAYS">
+            <GridPane>
+                <CustomTextField fx:id="searchBox" promptText="%Search" prefHeight="30.0" prefWidth="400.0">
+                </CustomTextField>
+            </GridPane>
+        </StackPane>
     </content>
 
 </DialogPane>

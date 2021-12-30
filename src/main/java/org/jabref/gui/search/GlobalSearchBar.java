@@ -1,14 +1,10 @@
 package org.jabref.gui.search;
 
-import java.lang.reflect.Field;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
-
-import javax.swing.undo.UndoManager;
-
+import de.saxsys.mvvmfx.utils.validation.FunctionBasedValidator;
+import de.saxsys.mvvmfx.utils.validation.ValidationMessage;
+import de.saxsys.mvvmfx.utils.validation.Validator;
+import de.saxsys.mvvmfx.utils.validation.visualization.ControlsFxVisualizer;
+import impl.org.controlsfx.skin.AutoCompletePopup;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
@@ -20,14 +16,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBase;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Skin;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
@@ -37,16 +26,13 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.CustomTextField;
 import org.jabref.gui.ClipBoardManager;
 import org.jabref.gui.Globals;
 import org.jabref.gui.JabRefFrame;
 import org.jabref.gui.StateManager;
-import org.jabref.gui.autocompleter.AppendPersonNamesStrategy;
-import org.jabref.gui.autocompleter.AutoCompleteFirstNameMode;
-import org.jabref.gui.autocompleter.AutoCompletionTextInputBinding;
-import org.jabref.gui.autocompleter.PersonNameStringConverter;
-import org.jabref.gui.autocompleter.SuggestionProvider;
+import org.jabref.gui.autocompleter.*;
 import org.jabref.gui.externalfiletype.ExternalFileTypes;
 import org.jabref.gui.icon.IconTheme;
 import org.jabref.gui.keyboard.KeyBinding;
@@ -63,18 +49,18 @@ import org.jabref.model.entry.Author;
 import org.jabref.model.search.rules.SearchRules;
 import org.jabref.preferences.PreferencesService;
 import org.jabref.preferences.SearchPreferences;
-
-import de.saxsys.mvvmfx.utils.validation.FunctionBasedValidator;
-import de.saxsys.mvvmfx.utils.validation.ValidationMessage;
-import de.saxsys.mvvmfx.utils.validation.Validator;
-import de.saxsys.mvvmfx.utils.validation.visualization.ControlsFxVisualizer;
-import impl.org.controlsfx.skin.AutoCompletePopup;
-import org.controlsfx.control.textfield.AutoCompletionBinding;
-import org.controlsfx.control.textfield.CustomTextField;
 import org.reactfx.util.FxTimer;
 import org.reactfx.util.Timer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.swing.undo.UndoManager;
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import static org.jabref.gui.actions.ActionHelper.needsDatabase;
 
@@ -87,6 +73,7 @@ public class GlobalSearchBar extends HBox {
     private static final PseudoClass CLASS_RESULTS_FOUND = PseudoClass.getPseudoClass("emptyResult");
 
     private final CustomTextField searchField = SearchTextField.create();
+    private final ToggleButton entryTypeButton;
     private final ToggleButton caseSensitiveButton;
     private final ToggleButton regularExpressionButton;
     private final ToggleButton fulltextButton;
@@ -143,6 +130,7 @@ public class GlobalSearchBar extends HBox {
         fulltextButton = IconTheme.JabRefIcons.FULLTEXT.asToggleButton();
         openGlobalSearchButton = IconTheme.JabRefIcons.OPEN_GLOBAL_SEARCH.asButton();
         keepSearchString = IconTheme.JabRefIcons.KEEP_SEARCH_STRING.asToggleButton();
+        entryTypeButton = IconTheme.JabRefIcons.FETCH_BY_IDENTIFIER.asToggleButton();
 
         initSearchModifierButtons();
 
@@ -151,6 +139,7 @@ public class GlobalSearchBar extends HBox {
                                                     .or(caseSensitiveButton.focusedProperty())
                                                     .or(fulltextButton.focusedProperty())
                                                     .or(keepSearchString.focusedProperty())
+                                                    .or(entryTypeButton.focusedProperty())
                                                     .or(searchField.textProperty()
                                                                    .isNotEmpty());
 
@@ -162,8 +151,10 @@ public class GlobalSearchBar extends HBox {
         fulltextButton.visibleProperty().bind(focusedOrActive);
         keepSearchString.visibleProperty().unbind();
         keepSearchString.visibleProperty().bind(focusedOrActive);
+        entryTypeButton.visibleProperty().unbind();
+        entryTypeButton.visibleProperty().bind(focusedOrActive);
 
-        StackPane modifierButtons = new StackPane(new HBox(regularExpressionButton, caseSensitiveButton, fulltextButton, keepSearchString));
+        StackPane modifierButtons = new StackPane(new HBox(regularExpressionButton, caseSensitiveButton, fulltextButton, keepSearchString,entryTypeButton));
         modifierButtons.setAlignment(Pos.CENTER);
         searchField.setRight(new HBox(searchField.getRight(), modifierButtons));
         searchField.getStyleClass().add("search-field");
@@ -234,6 +225,14 @@ public class GlobalSearchBar extends HBox {
             performSearch();
         });
 
+        entryTypeButton.setSelected(searchPreferences.isEntryType());
+        entryTypeButton.setTooltip(new Tooltip(Localization.lang("Search by entry type")));
+        initSearchModifierButton(entryTypeButton);
+        entryTypeButton.setOnAction(event -> {
+            searchPreferences.setSearchFlag(SearchRules.SearchFlags.ENTRY_TYPE, entryTypeButton.isSelected());
+            performSearch();
+        });
+
         openGlobalSearchButton.disableProperty().bindBidirectional(globalSearchActive);
         openGlobalSearchButton.setTooltip(new Tooltip(Localization.lang("Search across libraries in a new window")));
         initSearchModifierButton(openGlobalSearchButton);
@@ -287,6 +286,7 @@ public class GlobalSearchBar extends HBox {
         }
 
         SearchQuery searchQuery = new SearchQuery(this.searchField.getText(), searchPreferences.getSearchFlags());
+
         if (!searchQuery.isValid()) {
             informUserAboutInvalidSearchQuery();
             return;
