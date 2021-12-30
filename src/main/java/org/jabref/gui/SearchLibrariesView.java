@@ -1,6 +1,8 @@
 package org.jabref.gui;
 
 import com.airhacks.afterburner.views.ViewLoader;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -9,22 +11,22 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
 import org.controlsfx.control.textfield.CustomTextField;
 import org.jabref.gui.externalfiletype.ExternalFileTypes;
 import org.jabref.gui.util.BaseDialog;
-import org.jabref.gui.util.TooltipTextUtil;
 import org.jabref.logic.l10n.Localization;
-import org.jabref.logic.search.SearchQuery;
+import org.jabref.model.database.BibDatabaseContext;
+import org.jabref.model.entry.BibEntry;
+import org.jabref.model.entry.field.StandardField;
 import org.jabref.preferences.PreferencesService;
 import org.jabref.preferences.SearchPreferences;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.swing.undo.UndoManager;
-import java.util.List;
+import java.util.Locale;
+
 public class SearchLibrariesView extends BaseDialog{
 
 
@@ -41,6 +43,8 @@ public class SearchLibrariesView extends BaseDialog{
     private TextField textField = new CustomTextField();
     private Button searchButton = new Button("Search");
 
+    private final static int MAX_CHARATERS = 500;
+
     private static final PseudoClass CLASS_NO_RESULTS = PseudoClass.getPseudoClass("emptyResult");
 
     private SearchPreferences searchPreferences;
@@ -49,6 +53,8 @@ public class SearchLibrariesView extends BaseDialog{
     private SearchLibrariesResultDialog resultDialog;
 
     private UndoManager undoManager;
+
+    private ObservableList<String> types = FXCollections.observableArrayList();
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchLibrariesView.class);
 
@@ -84,6 +90,7 @@ public class SearchLibrariesView extends BaseDialog{
             //resultDialog = new SearchLibrariesResultDialog(ExternalFileTypes.getInstance());
             resultDialog = new SearchLibrariesResultDialog(ExternalFileTypes.getInstance(), preferencesService, stateManager, dialogService, undoManager);
             this.performSearch();
+            resultDialog.updateResult(types);
             resultDialog.showAndWait();
         });
 
@@ -92,23 +99,28 @@ public class SearchLibrariesView extends BaseDialog{
     }
 
     private void performSearch() {
-        LOGGER.debug("Flags: {}", searchPreferences.getSearchFlags());
-        LOGGER.debug("Run search " + textField.getText());
-
         // An empty search field should cause the search to be cleared.
         if (textField.getText().isEmpty()) {
-            currentResults.setText("");
-            setSearchFieldHintTooltip(null);
-            stateManager.clearSearchQuery();
+            dialogService.notify(Localization.lang("No content found"));
             return;
         }
 
-        SearchQuery searchQuery = new SearchQuery(this.textField.getText(), searchPreferences.getSearchFlags());
-        if (!searchQuery.isValid()) {
-            informUserAboutInvalidSearchQuery();
-            return;
+        ObservableList<BibDatabaseContext> listDB = stateManager.getOpenDatabases();
+        types.removeAll(types);
+
+        for(BibDatabaseContext db : listDB) {
+            for(BibEntry e : db.getEntries()) {
+                String author = e.getField(StandardField.AUTHOR).isEmpty() ? "N/A" : e.getField(StandardField.AUTHOR).get();
+                String year = e.getField(StandardField.YEAR).isEmpty() ? "N/A" : e.getField(StandardField.YEAR).get();
+                String title = e.getField(StandardField.TITLE).isEmpty() ? "N/A" : e.getField(StandardField.TITLE).get();
+                if (e.getType().getName().toLowerCase(Locale.ROOT).compareTo(textField.getText().toLowerCase(Locale.ROOT)) == 0 ||
+                        author.toLowerCase(Locale.ROOT).compareTo(textField.getText().toLowerCase(Locale.ROOT)) == 0 ||
+                        year.toLowerCase(Locale.ROOT).compareTo(textField.getText().toLowerCase(Locale.ROOT)) == 0 ||
+                        title.toLowerCase(Locale.ROOT).compareTo(textField.getText().toLowerCase(Locale.ROOT)) == 0) {
+                    types.add(e.getAuthorTitleYear(MAX_CHARATERS));
+                }
+            }
         }
-        stateManager.setSearchQuery(searchQuery);
     }
 
     private void informUserAboutInvalidSearchQuery() {
@@ -118,20 +130,5 @@ public class SearchLibrariesView extends BaseDialog{
 
         String illegalSearch = Localization.lang("Search failed: illegal search expression");
         currentResults.setText(illegalSearch);
-    }
-
-    private void setSearchFieldHintTooltip(TextFlow description) {
-        if (preferencesService.getGeneralPreferences().shouldShowAdvancedHints()) {
-            String genericDescription = Localization.lang("Hint:\n\nTo search all fields for <b>Smith</b>, enter:\n<tt>smith</tt>\n\nTo search the field <b>author</b> for <b>Smith</b> and the field <b>title</b> for <b>electrical</b>, enter:\n<tt>author=Smith and title=electrical</tt>");
-            List<Text> genericDescriptionTexts = TooltipTextUtil.createTextsFromHtml(genericDescription);
-
-            if (description == null) {
-                TextFlow emptyHintTooltip = new TextFlow();
-                emptyHintTooltip.getChildren().setAll(genericDescriptionTexts);
-            } else {
-                description.getChildren().add(new Text("\n\n"));
-                description.getChildren().addAll(genericDescriptionTexts);
-            }
-        }
     }
 }
