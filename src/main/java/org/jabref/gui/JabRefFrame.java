@@ -693,7 +693,7 @@ public class JabRefFrame extends BorderPane {
 
                 new SeparatorMenuItem(),
 
-                factory.createMenuItem(StandardActions.SEARCH_LIBRARIES, new SearchLibrariesAction(dialogService, stateManager, prefs, undoManager))
+                factory.createMenuItem(StandardActions.SEARCH_LIBRARIES, new SearchLibrariesAction(dialogService, stateManager))
 
         );
 

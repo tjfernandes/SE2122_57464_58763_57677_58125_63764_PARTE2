@@ -64,7 +64,7 @@ public class GenerateEntryForEntryType {
         BibDatabaseContext db = stateManager.getActiveDatabase().orElseThrow(NullPointerException::new);
         List<BibEntry> entries = db.getEntries();
 
-        types.remove(0,types.size());
+        types.removeAll(types);
         for(BibEntry e:entries){
 
             if(testDates(startYear) && testDates(endYear)){
@@ -74,7 +74,8 @@ public class GenerateEntryForEntryType {
             else
             if(testDates(endYear)){
                 if(     e.getType().getName().toLowerCase(Locale.ROOT).compareTo(idTextField.getText().toLowerCase(Locale.ROOT)) == 0
-                        && getYear(e.getAuthorTitleYear(MAX_CHARATERS)).compareTo(startYear.getText()) >= 0)
+                        && getYear(e.getAuthorTitleYear(MAX_CHARATERS)).compareTo(startYear.getText()) >= 0
+                        && getYear(e.getAuthorTitleYear(MAX_CHARATERS)).compareTo("N/A") != 0 )
                     types.add(e.getAuthorTitleYear(MAX_CHARATERS));
             }
             else
@@ -95,7 +96,7 @@ public class GenerateEntryForEntryType {
             for(int d = 0; d<types.size()-i-1;d++){
                 String s1 = getYear(types.get(d));
                 String s2 = getYear(types.get(d+1));
-                if(s1.compareTo(s2) > 0){
+                if(s1.compareTo(s2) < 0){
                     String temp = types.get(d);
                     types.remove(d);
                     types.add(d+1,temp);

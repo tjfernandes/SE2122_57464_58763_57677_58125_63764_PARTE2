@@ -3,41 +3,27 @@ package org.jabref.gui;
 import com.airhacks.afterburner.views.ViewLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.DialogPane;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import org.controlsfx.control.textfield.CustomTextField;
-import org.jabref.gui.externalfiletype.ExternalFileTypes;
 import org.jabref.gui.util.BaseDialog;
 import org.jabref.logic.l10n.Localization;
 import org.jabref.model.database.BibDatabaseContext;
 import org.jabref.model.entry.BibEntry;
 import org.jabref.model.entry.field.StandardField;
-import org.jabref.preferences.PreferencesService;
-import org.jabref.preferences.SearchPreferences;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import javax.swing.undo.UndoManager;
 import java.util.Locale;
 
 public class SearchLibrariesView extends BaseDialog{
 
-
-    //@FXML private CustomTextField searchBox;
-
-   // @FXML private Button searchButton;
     @FXML private DialogPane dialogPane;
 
     private StateManager stateManager;
-    private PreferencesService preferencesService;
-    private final Label currentResults = new Label("");
 
     private GridPane gridPane = new GridPane();
     private TextField textField = new CustomTextField();
@@ -45,27 +31,15 @@ public class SearchLibrariesView extends BaseDialog{
 
     private final static int MAX_CHARATERS = 500;
 
-    private static final PseudoClass CLASS_NO_RESULTS = PseudoClass.getPseudoClass("emptyResult");
-
-    private SearchPreferences searchPreferences;
-
     private final DialogService dialogService;
     private SearchLibrariesResultDialog resultDialog;
 
-    private UndoManager undoManager;
-
     private ObservableList<String> types = FXCollections.observableArrayList();
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SearchLibrariesView.class);
-
-    public SearchLibrariesView(DialogService dialogService, StateManager stateManager, PreferencesService preferencesService, UndoManager undoManager) {
+    public SearchLibrariesView(DialogService dialogService, StateManager stateManager) {
         this.dialogService = dialogService;
         this.stateManager = stateManager;
-        this.preferencesService = preferencesService;
-        this.searchPreferences = preferencesService.getSearchPreferences();
-        this.undoManager = undoManager;
 
-        currentResults.setPrefWidth(150);
 
 
         super.setTitle(Localization.lang("Search results from all libraries"));
@@ -87,8 +61,7 @@ public class SearchLibrariesView extends BaseDialog{
         searchButton.setAlignment(Pos.CENTER_RIGHT);
         searchButton.setStyle("-fx-background-color: #a3acc0");
         searchButton.setOnAction(event -> {
-            //resultDialog = new SearchLibrariesResultDialog(ExternalFileTypes.getInstance());
-            resultDialog = new SearchLibrariesResultDialog(ExternalFileTypes.getInstance(), preferencesService, stateManager, dialogService, undoManager);
+            resultDialog = new SearchLibrariesResultDialog();
             this.performSearch();
             resultDialog.updateResult(types);
             resultDialog.showAndWait();
@@ -123,12 +96,4 @@ public class SearchLibrariesView extends BaseDialog{
         }
     }
 
-    private void informUserAboutInvalidSearchQuery() {
-        textField.pseudoClassStateChanged(CLASS_NO_RESULTS, true);
-
-        stateManager.clearSearchQuery();
-
-        String illegalSearch = Localization.lang("Search failed: illegal search expression");
-        currentResults.setText(illegalSearch);
-    }
 }
