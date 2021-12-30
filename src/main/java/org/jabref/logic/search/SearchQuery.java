@@ -1,22 +1,14 @@
 package org.jabref.logic.search;
 
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import org.jabref.logic.l10n.Localization;
 import org.jabref.model.entry.BibEntry;
 import org.jabref.model.search.SearchMatcher;
-import org.jabref.model.search.rules.ContainBasedSearchRule;
-import org.jabref.model.search.rules.GrammarBasedSearchRule;
-import org.jabref.model.search.rules.SearchRule;
-import org.jabref.model.search.rules.SearchRules;
-import org.jabref.model.search.rules.SentenceAnalyzer;
+import org.jabref.model.search.rules.*;
+
+import java.util.*;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class SearchQuery implements SearchMatcher {
 
@@ -93,6 +85,14 @@ public class SearchQuery implements SearchMatcher {
         }
     }
 
+    private String getEntryTypeDescription() {
+        if (searchFlags.contains(SearchRules.SearchFlags.ENTRY_TYPE)) {
+            return "entry type";
+        } else {
+            return "";
+        }
+    }
+
     private String getRegularExpressionDescription() {
         if (searchFlags.contains(SearchRules.SearchFlags.REGULAR_EXPRESSION)) {
             return "regular expression";
@@ -102,10 +102,11 @@ public class SearchQuery implements SearchMatcher {
     }
 
     public String localize() {
-        return String.format("\"%s\" (%s, %s)",
+        return String.format("\"%s\" (%s, %s,%s)",
                 getQuery(),
                 getLocalizedCaseSensitiveDescription(),
-                getLocalizedRegularExpressionDescription());
+                getLocalizedRegularExpressionDescription(),
+                getLocalizedEntryTypeDescription());
     }
 
     private String getLocalizedCaseSensitiveDescription() {
@@ -120,7 +121,15 @@ public class SearchQuery implements SearchMatcher {
         if (searchFlags.contains(SearchRules.SearchFlags.REGULAR_EXPRESSION)) {
             return Localization.lang("regular expression");
         } else {
-            return Localization.lang("plain text");
+            return Localization.lang("");
+        }
+    }
+
+    private String getLocalizedEntryTypeDescription() {
+        if (searchFlags.contains(SearchRules.SearchFlags.ENTRY_TYPE)) {
+            return Localization.lang("entry type");
+        } else {
+            return Localization.lang("");
         }
     }
 

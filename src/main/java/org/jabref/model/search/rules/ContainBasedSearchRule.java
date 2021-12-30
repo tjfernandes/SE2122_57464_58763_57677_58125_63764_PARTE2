@@ -1,13 +1,5 @@
 package org.jabref.model.search.rules;
 
-import java.io.IOException;
-import java.util.EnumSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Vector;
-import java.util.stream.Collectors;
-
 import org.jabref.architecture.AllowedToUseLogic;
 import org.jabref.gui.Globals;
 import org.jabref.gui.LibraryTab;
@@ -18,9 +10,12 @@ import org.jabref.model.entry.field.Field;
 import org.jabref.model.pdf.search.PdfSearchResults;
 import org.jabref.model.pdf.search.SearchResult;
 import org.jabref.model.search.rules.SearchRules.SearchFlags;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Search rule for contain-based search.
@@ -59,7 +54,6 @@ public class ContainBasedSearchRule implements SearchRule {
         }
 
         List<String> unmatchedWords = new SentenceAnalyzer(searchString).getWords();
-
         for (Field fieldKey : bibEntry.getFields()) {
             String formattedFieldContent = bibEntry.getLatexFreeField(fieldKey).get();
             if (!searchFlags.contains(SearchRules.SearchFlags.CASE_SENSITIVE)) {

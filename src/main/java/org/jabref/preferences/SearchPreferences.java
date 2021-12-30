@@ -1,16 +1,15 @@
 package org.jabref.preferences;
 
-import java.util.EnumSet;
-
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
-
 import org.jabref.gui.search.SearchDisplayMode;
 import org.jabref.model.search.rules.SearchRules.SearchFlags;
+
+import java.util.EnumSet;
 
 public class SearchPreferences {
 
@@ -34,6 +33,9 @@ public class SearchPreferences {
         }
         if (isKeepSearchString) {
             searchFlags.add(SearchFlags.KEEP_SEARCH_STRING);
+        }
+        if (isEntryType()) {
+            searchFlags.add(SearchFlags.ENTRY_TYPE);
         }
     }
 
@@ -82,6 +84,9 @@ public class SearchPreferences {
 
     public boolean isRegularExpression() {
         return searchFlags.contains(SearchFlags.REGULAR_EXPRESSION);
+    }
+    public boolean isEntryType() {
+        return searchFlags.contains(SearchFlags.ENTRY_TYPE);
     }
 
     public boolean isFulltext() {

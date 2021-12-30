@@ -72,6 +72,7 @@ public class GenerateEntryForEntryType {
                     types.add(e.getAuthorTitleYear(MAX_CHARATERS));
             }
             else
+<<<<<<< HEAD
             if(testDates(endYear)){
                 if(     e.getType().getName().toLowerCase(Locale.ROOT).compareTo(idTextField.getText().toLowerCase(Locale.ROOT)) == 0
                         && getYear(e.getAuthorTitleYear(MAX_CHARATERS)).compareTo(startYear.getText()) >= 0)
@@ -89,6 +90,25 @@ public class GenerateEntryForEntryType {
                         && getYear(e.getAuthorTitleYear(MAX_CHARATERS)).compareTo(endYear.getText()) <= 0)
                     types.add(e.getAuthorTitleYear(MAX_CHARATERS));
             }
+=======
+                if(testDates(endYear)){
+                    if(     e.getType().getName().toLowerCase(Locale.ROOT).compareTo(idTextField.getText().toLowerCase(Locale.ROOT)) == 0
+                            && getYear(e.getAuthorTitleYear(MAX_CHARATERS)).compareTo(startYear.getText()) >= 0)
+                        types.add(e.getAuthorTitleYear(MAX_CHARATERS));
+                }
+                else
+                    if(testDates(startYear)){
+                        if(     e.getType().getName().toLowerCase(Locale.ROOT).compareTo(idTextField.getText().toLowerCase(Locale.ROOT)) == 0
+                                && getYear(e.getAuthorTitleYear(MAX_CHARATERS)).compareTo(endYear.getText()) <= 0)
+                            types.add(e.getAuthorTitleYear(MAX_CHARATERS));
+                    }
+                    else {
+                        if(     e.getType().getName().toLowerCase(Locale.ROOT).compareTo(idTextField.getText().toLowerCase(Locale.ROOT)) == 0
+                                && getYear(e.getAuthorTitleYear(MAX_CHARATERS)).compareTo(startYear.getText()) >= 0
+                                && getYear(e.getAuthorTitleYear(MAX_CHARATERS)).compareTo(endYear.getText()) <= 0)
+                            types.add(e.getAuthorTitleYear(MAX_CHARATERS));
+                    }
+>>>>>>> b44dfd182f7fe4853fc0848933b6a550b244f5c7
         }
 
         for(int i=0;i<types.size()-1;i++){
