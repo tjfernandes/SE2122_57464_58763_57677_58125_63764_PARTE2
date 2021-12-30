@@ -7,6 +7,7 @@ import javax.swing.undo.UndoManager;
 
 public class SearchLibrariesAction extends SimpleCommand {
 
+
     private DialogService dialogService;
     private PreferencesService preferencesService;
     private StateManager stateManager;

@@ -23,6 +23,7 @@ import javax.swing.undo.UndoManager;
 public class SearchLibrariesView extends BaseDialog{
 
 
+
     //@FXML private CustomTextField searchBox;
 
    // @FXML private Button searchButton;
