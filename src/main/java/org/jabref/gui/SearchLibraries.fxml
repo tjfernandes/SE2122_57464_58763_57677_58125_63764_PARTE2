@@ -7,19 +7,10 @@
 <?import javafx.scene.layout.*?>
 <?import org.controlsfx.control.textfield.CustomTextField?>
 
-<DialogPane xmlns="http://javafx.com/javafx"
+<DialogPane fx:id="dialogPane"
+            xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.jabref.gui.SearchLibraries"
+            fx:controller="org.jabref.gui.SearchLibrariesView"
             prefHeight="40.0" prefWidth="400.0">
-        <buttonTypes>
-            <ButtonType fx:constant="CANCEL"/>
-            <ButtonType fx:id="searchButton" buttonData="OK_DONE" text="%Search"/>
-        </buttonTypes>
-    <content>
-        <GridPane>
-            <CustomTextField fx:id="searchBox" promptText="%Search" prefHeight="30.0" prefWidth="400.0">
-            </CustomTextField>
-        </GridPane>
-    </content>
-
+    <ButtonType fx:constant="CANCEL"/>
 </DialogPane>
