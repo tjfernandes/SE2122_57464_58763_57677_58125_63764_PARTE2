@@ -25,7 +25,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.swing.undo.UndoManager;
 import java.util.List;
-
 public class SearchLibrariesView extends BaseDialog{
 
 

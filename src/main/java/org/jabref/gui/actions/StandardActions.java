@@ -171,6 +171,7 @@ public enum StandardActions implements Action {
     SEARCH_FOR_UPDATES(Localization.lang("Check for updates")),
     ABOUT(Localization.lang("About JabRef"), Localization.lang("About JabRef")),
 
+
     SEARCH_LIBRARIES(Localization.lang("Search on all libraries"), IconTheme.JabRefIcons.SEARCH),
 
     EDIT_LIST(Localization.lang("Edit"), IconTheme.JabRefIcons.EDIT),
