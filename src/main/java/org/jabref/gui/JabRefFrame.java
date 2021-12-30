@@ -948,10 +948,6 @@ public class JabRefFrame extends BorderPane {
         return button;
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> b44dfd182f7fe4853fc0848933b6a550b244f5c7
     private Group createTaskIndicator() {
         ProgressIndicator indicator = new ProgressIndicator();
         indicator.getStyleClass().add("progress-indicatorToolbar");
