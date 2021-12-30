@@ -90,7 +90,10 @@ public class SearchLibrariesView extends BaseDialog{
                         author.toLowerCase(Locale.ROOT).compareTo(textField.getText().toLowerCase(Locale.ROOT)) == 0 ||
                         year.toLowerCase(Locale.ROOT).compareTo(textField.getText().toLowerCase(Locale.ROOT)) == 0 ||
                         title.toLowerCase(Locale.ROOT).compareTo(textField.getText().toLowerCase(Locale.ROOT)) == 0) {
-                    types.add(e.getAuthorTitleYear(MAX_CHARATERS));
+                    String lib = "Untilted Lib";
+                        if (db.getDatabasePath().isPresent())
+                            lib = db.getDatabasePath().get().getFileName().toString();
+                    types.add(lib + " --> " + e.getAuthorTitleYear(MAX_CHARATERS));
                 }
             }
         }
